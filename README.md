@@ -59,10 +59,4 @@ Importante sobre o arquivo 2_bd3_projeto_dw_tables_inserts.sql:
 ## 🧪 Validação rápida
 Após criar o DW e popular as dimensões, execute o conteúdo do arquivo: 
 
-```sql
-\i bd3_projeto_dw_selects.sql
-```
-
-## � Notas finais
-- O arquivo `01-backup-original/BD_VAREJO.sql` é apenas referência do sistema de origem.
-- A dimensão tempo incluída cobre o período 2020–2022 com colunas úteis para calendário (dia, semana, mês, trimestre, fim de semana, feriado, etc.).
+   - `02-scripts-dw/bd3_projeto_dw_selects.sql`
