@@ -77,12 +77,22 @@ def converter_ddl(ddl_content):
     resultado.append("-- Script DDL - Estrutura das Tabelas")
     resultado.append("-- =========================================\n")
     
+    # FAZER CONVERSÕES GLOBAIS PRIMEIRO
+    # Converter IDENTITY para SERIAL antes de tudo
+    ddl_content = re.sub(r'NUMERIC\(\d+\)\s+IDENTITY\s*\([^)]+\)', 'SERIAL', ddl_content)
+    ddl_content = re.sub(r'INTEGER\s+IDENTITY\s*\([^)]+\)', 'SERIAL', ddl_content)
+    
     # Remover comandos específicos do SQL Server
     ddl_content = re.sub(r'--USE master.*?GO', '', ddl_content, flags=re.DOTALL)
     ddl_content = re.sub(r'USE \w+.*?GO', '', ddl_content, flags=re.DOTALL)
     ddl_content = re.sub(r'SET dateformat.*?;', '', ddl_content)
     ddl_content = re.sub(r'go\s*$', '', ddl_content, flags=re.MULTILINE | re.IGNORECASE)
     ddl_content = re.sub(r'\sGO\s*$', '', ddl_content, flags=re.MULTILINE)
+    
+    # Outras conversões globais
+    ddl_content = re.sub(r'NUMERIC\((\d+),(\d+)\)', r'DECIMAL(\1,\2)', ddl_content)
+    ddl_content = re.sub(r'NUMERIC\((\d+)\)', 'INTEGER', ddl_content)
+    ddl_content = re.sub(r'\bdatetime\b', 'TIMESTAMP', ddl_content, flags=re.IGNORECASE)
     
     # Ordem correta para drop (considerando dependências FK)
     drop_order = [
@@ -124,12 +134,7 @@ def converter_ddl(ddl_content):
             if not line:
                 continue
             
-            # Converter tipos de dados
-            line = re.sub(r'NUMERIC\((\d+)\)\s+IDENTITY\s*\(\s*\d+\s*,\s*\d+\s*\)', 'SERIAL', line)
-            line = re.sub(r'NUMERIC\((\d+),(\d+)\)', r'DECIMAL(\1,\2)', line)
-            line = re.sub(r'NUMERIC\((\d+)\)', 'INTEGER', line)
-            line = re.sub(r'\bdatetime\b', 'TIMESTAMP', line, flags=re.IGNORECASE)
-            
+            # Linha já foi processada nas conversões globais
             columns.append(f"    {line}")
         
         # Gerar SQL da tabela
@@ -199,7 +204,8 @@ def converter_definicoes_colunas(table_def):
             continue
             
         # Converter tipos de dados
-        linha = re.sub(r'NUMERIC\((\d+)\)\s+IDENTITY\s*\(\s*\d+\s*,\s*\d+\s*\)', r'SERIAL', linha)
+        linha = re.sub(r'NUMERIC\(\d+\)\s+IDENTITY\s*\([^)]+\)', r'SERIAL', linha)
+        linha = re.sub(r'INTEGER\s+IDENTITY\s*\([^)]+\)', r'SERIAL', linha)
         linha = re.sub(r'NUMERIC\((\d+),(\d+)\)', r'DECIMAL(\1,\2)', linha)
         linha = re.sub(r'NUMERIC\((\d+)\)', r'INTEGER', linha)
         linha = re.sub(r'\bdatetime\b', 'TIMESTAMP', linha, flags=re.IGNORECASE)

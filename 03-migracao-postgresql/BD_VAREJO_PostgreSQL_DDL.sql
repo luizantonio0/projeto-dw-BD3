@@ -36,16 +36,14 @@ CREATE TABLE tb001_uf (
 
 -- Tabela: tb002_cidades
 CREATE TABLE tb002_cidades (
-    tb002_cod_cidade     INTEGER  IDENTITY ( 1,
-    1 ),
+    tb002_cod_cidade     SERIAL,
     tb001_sigla_uf       VARCHAR(2)  NOT NULL,
     tb002_nome_cidade    VARCHAR(255)  NOT NULL
 );
 
 -- Tabela: tb003_enderecos
 CREATE TABLE tb003_enderecos (
-    tb003_cod_endereco   INTEGER  IDENTITY ( 1,
-    1 ),
+    tb003_cod_endereco   SERIAL,
     tb001_sigla_uf       VARCHAR(2)  NOT NULL,
     tb002_cod_cidade     INTEGER  NOT NULL,
     tb003_nome_rua       VARCHAR(255)  NOT NULL,
@@ -58,8 +56,7 @@ CREATE TABLE tb003_enderecos (
 
 -- Tabela: tb004_lojas
 CREATE TABLE tb004_lojas (
-    tb004_cod_loja       INTEGER  IDENTITY ( 1,
-    1 ),
+    tb004_cod_loja       SERIAL,
     tb003_cod_endereco   INTEGER  NULL,
     tb004_matriz         INTEGER  NULL,
     tb004_cnpj_loja      VARCHAR(20)  NOT NULL,
@@ -70,17 +67,16 @@ CREATE TABLE tb004_lojas (
 CREATE TABLE tb005_006_funcionarios_cargos (
     tb005_matricula      INTEGER  NOT NULL,
     tb006_cod_cargo      INTEGER  NOT NULL,
-    tb005_006_valor_cargo NUMERIC(10,
+    tb005_006_valor_cargo DECIMAL(10,
     2)  NOT NULL,
-    tb005_006_perc_comissao_cargo NUMERIC(5,
+    tb005_006_perc_comissao_cargo DECIMAL(5,
     2)  NOT NULL,
     tb005_006_data_promocao TIMESTAMP  NOT NULL
 );
 
 -- Tabela: tb005_funcionarios
 CREATE TABLE tb005_funcionarios (
-    tb005_matricula      INTEGER  IDENTITY ( 1,
-    1 ),
+    tb005_matricula      SERIAL,
     tb004_cod_loja       INTEGER  NOT NULL,
     tb003_cod_endereco   INTEGER  NOT NULL,
     tb005_nome_completo  VARCHAR(255)  NOT NULL,
@@ -94,21 +90,19 @@ CREATE TABLE tb005_funcionarios (
 
 -- Tabela: tb006_cargos
 CREATE TABLE tb006_cargos (
-    tb006_cod_cargo      INTEGER  IDENTITY ( 1,
-    1 ),
+    tb006_cod_cargo      SERIAL,
     tb006_nome_cargo     VARCHAR(255)  NOT NULL
 );
 
 -- Tabela: tb010_012_vendas
 CREATE TABLE tb010_012_vendas (
-    tb010_012_cod_venda  INTEGER  IDENTITY (1,
-    1),
+    tb010_012_cod_venda  SERIAL,
     tb010_cpf            INTEGER  NOT NULL,
     tb012_cod_produto    INTEGER  NOT NULL,
     tb005_matricula      INTEGER  NOT NULL,
     tb010_012_data       TIMESTAMP  NOT NULL,
     tb010_012_quantidade INTEGER  NOT NULL,
-    tb010_012_valor_unitario NUMERIC(12,
+    tb010_012_valor_unitario DECIMAL(12,
     4)  NOT NULL
 );
 
@@ -122,7 +116,7 @@ CREATE TABLE tb010_clientes (
 
 -- Tabela: tb010_clientes_antigos
 CREATE TABLE tb010_clientes_antigos (
-    tb010_cpf            NUMERIC(15,
+    tb010_cpf            DECIMAL(15,
     0)  NOT NULL,
     tb010_nome           VARCHAR(255)  NULL
 );
@@ -137,13 +131,12 @@ CREATE TABLE tb011_logins (
 
 -- Tabela: tb012_017_compras
 CREATE TABLE tb012_017_compras (
-    tb012_017_cod_compra INTEGER IDENTITY ( 1,
-    1 ),
+    tb012_017_cod_compra SERIAL,
     tb012_cod_produto    INTEGER  NOT NULL,
     tb017_cod_fornecedor INTEGER  NOT NULL,
     tb012_017_data       TIMESTAMP  NULL,
     tb012_017_quantidade INTEGER  NULL,
-    tb012_017_valor_unitario NUMERIC(12,
+    tb012_017_valor_unitario DECIMAL(12,
     2)  NULL
 );
 
@@ -156,15 +149,13 @@ CREATE TABLE tb012_produtos (
 
 -- Tabela: tb013_categorias
 CREATE TABLE tb013_categorias (
-    tb013_cod_categoria  INTEGER  IDENTITY ( 1,
-    1 ),
+    tb013_cod_categoria  SERIAL,
     tb013_descricao      VARCHAR(255)  NOT NULL
 );
 
 -- Tabela: tb014_prd_alimentos
 CREATE TABLE tb014_prd_alimentos (
-    tb014_cod_prd_alimentos INTEGER  IDENTITY ( 1,
-    1 ),
+    tb014_cod_prd_alimentos SERIAL,
     tb012_cod_produto    INTEGER  NOT NULL,
     tb014_detalhamento   VARCHAR(255)  NOT NULL,
     tb014_unidade_medida VARCHAR(255)  NOT NULL,
@@ -176,8 +167,7 @@ CREATE TABLE tb014_prd_alimentos (
 
 -- Tabela: tb015_prd_eletros
 CREATE TABLE tb015_prd_eletros (
-    tb015_cod_prd_eletro INTEGER  IDENTITY ( 1,
-    1 ),
+    tb015_cod_prd_eletro SERIAL,
     tb012_cod_produto    INTEGER  NOT NULL,
     tb015_detalhamento   VARCHAR(255)  NOT NULL,
     tb015_tensao         VARCHAR(255)  NULL,
@@ -188,8 +178,7 @@ CREATE TABLE tb015_prd_eletros (
 
 -- Tabela: tb016_prd_vestuarios
 CREATE TABLE tb016_prd_vestuarios (
-    tb016_cod_prd_vestuario INTEGER  IDENTITY ( 1,
-    1 ),
+    tb016_cod_prd_vestuario SERIAL,
     tb012_cod_produto    INTEGER  NOT NULL,
     tb016_detalhamento   VARCHAR(255)  NOT NULL,
     tb016_sexo           CHAR(1)  NOT NULL,
@@ -201,8 +190,7 @@ CREATE TABLE tb016_prd_vestuarios (
 
 -- Tabela: tb017_fornecedores
 CREATE TABLE tb017_fornecedores (
-    tb017_cod_fornecedor INTEGER IDENTITY ( 1,
-    1 ),
+    tb017_cod_fornecedor SERIAL,
     tb017_razao_social   VARCHAR(255)  NULL,
     tb017_nome_fantasia  VARCHAR(255)  NULL,
     tb017_fone           VARCHAR(15)  NULL,
@@ -211,8 +199,7 @@ CREATE TABLE tb017_fornecedores (
 
 -- Tabela: tb999_log
 CREATE TABLE tb999_log (
-    tb999_cod_log        INTEGER IDENTITY ( 1,
-    1 ),
+    tb999_cod_log        SERIAL,
     tb099_objeto         VARCHAR(100)  NOT NULL,
     tb999_dml            VARCHAR(25)  NOT NULL,
     tb999_data           TIMESTAMP  NOT NULL
