@@ -97,7 +97,7 @@ CREATE TABLE tb006_cargos (
 -- Tabela: tb010_012_vendas
 CREATE TABLE tb010_012_vendas (
     tb010_012_cod_venda  SERIAL,
-    tb010_cpf            INTEGER  NOT NULL,
+    tb010_cpf            BIGINT  NOT NULL,
     tb012_cod_produto    INTEGER  NOT NULL,
     tb005_matricula      INTEGER  NOT NULL,
     tb010_012_data       TIMESTAMP  NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE tb010_012_vendas (
 
 -- Tabela: tb010_clientes
 CREATE TABLE tb010_clientes (
-    tb010_cpf            INTEGER  NOT NULL,
+    tb010_cpf            BIGINT  NOT NULL,
     tb010_nome           VARCHAR(255)  NOT NULL,
     tb010_fone_residencial VARCHAR(255)  NOT NULL,
     tb010_fone_celular   VARCHAR(255)  NULL
@@ -124,7 +124,7 @@ CREATE TABLE tb010_clientes_antigos (
 -- Tabela: tb011_logins
 CREATE TABLE tb011_logins (
     tb011_logins         VARCHAR(255)  NOT NULL,
-    tb010_cpf            INTEGER  NOT NULL,
+    tb010_cpf            BIGINT  NOT NULL,
     tb011_senha          VARCHAR(255)  NOT NULL,
     tb011_data_cadastro  TIMESTAMP  NULL
 );

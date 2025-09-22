@@ -31,6 +31,7 @@ INSERT INTO tb001_uf VALUES('SC', 'Santa Catarina');
 INSERT INTO tb001_uf VALUES('SP', 'São Paulo');
 INSERT INTO tb001_uf VALUES('SE', 'Sergipe');
 INSERT INTO tb001_uf VALUES('TO', 'Tocantins');
+
 -- Dados para tabela: tb002_cidades
 INSERT INTO tb002_cidades (tb001_sigla_uf, tb002_nome_cidade) VALUES('AC', 'Rio Branco');
 INSERT INTO tb002_cidades (tb001_sigla_uf, tb002_nome_cidade) VALUES('AL', 'Maceió');
@@ -59,6 +60,7 @@ INSERT INTO tb002_cidades (tb001_sigla_uf, tb002_nome_cidade) VALUES('SC', 'Flor
 INSERT INTO tb002_cidades (tb001_sigla_uf, tb002_nome_cidade) VALUES('SP', 'São Paulo');
 INSERT INTO tb002_cidades (tb001_sigla_uf, tb002_nome_cidade) VALUES('SE', 'Aracaju');
 INSERT INTO tb002_cidades (tb001_sigla_uf, tb002_nome_cidade) VALUES('TO', 'Palmas');
+
 -- Dados para tabela: tb003_enderecos
 INSERT INTO tb003_enderecos (tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, tb003_numero_rua, tb003_complemento, tb003_ponto_referencia, tb003_bairro, tb003_CEP) VALUES('MG', 13, 'Av. Brasil', '1.234',null,null, 'Centro', '80.345-432');
 INSERT INTO tb003_enderecos (tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, tb003_numero_rua, tb003_complemento, tb003_ponto_referencia, tb003_bairro, tb003_CEP) VALUES('MG', 13, 'Av. Brasil', '234',null,null, 'Centro', '80.345-533');
@@ -111,12 +113,14 @@ INSERT INTO tb003_enderecos (tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, t
 INSERT INTO tb003_enderecos (tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, tb003_numero_rua, tb003_complemento, tb003_ponto_referencia, tb003_bairro, tb003_CEP) VALUES('SP', 25, 'Av. Consolação', '54',null,null, 'Centro', '81.345-438');
 INSERT INTO tb003_enderecos (tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, tb003_numero_rua, tb003_complemento, tb003_ponto_referencia, tb003_bairro, tb003_CEP) VALUES('SP', 25, 'Av. Consolação', '345',null,null, 'Centro', '80.345-599');
 INSERT INTO tb003_enderecos (tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, tb003_numero_rua, tb003_complemento, tb003_ponto_referencia, tb003_bairro, tb003_CEP) VALUES('SP', 25, 'Av. Consolação', '11',null,null, 'Centro', '80.345-836');
+
 -- Dados para tabela: tb004_lojas
 INSERT INTO tb004_lojas (tb003_cod_endereco, tb004_matriz, tb004_cnpj_loja, tb004_inscricao_estadual) VALUES(5,null, '99.555.000-0001/01', '234.655.765');
 INSERT INTO tb004_lojas (tb003_cod_endereco, tb004_matriz, tb004_cnpj_loja, tb004_inscricao_estadual) VALUES(1,1, '99.555.000-0001/02', '567.655.766');
 INSERT INTO tb004_lojas (tb003_cod_endereco, tb004_matriz, tb004_cnpj_loja, tb004_inscricao_estadual) VALUES(28,1, '99.555.000-0001/03', '888.655.767');
 INSERT INTO tb004_lojas (tb003_cod_endereco, tb004_matriz, tb004_cnpj_loja, tb004_inscricao_estadual) VALUES(41,null, '99.555.000-0001/04', '234.655.768');
 INSERT INTO tb004_lojas (tb003_cod_endereco, tb004_matriz, tb004_cnpj_loja, tb004_inscricao_estadual) VALUES(10,1, '99.555.000-0001/05', '234.567.769');
+
 -- Dados para tabela: tb005_funcionarios
 INSERT INTO tb005_funcionarios (tb004_cod_loja, tb003_cod_endereco, tb005_nome_completo, tb005_data_nascimento, tb005_CPF, tb005_RG, tb005_status, tb005_data_contratacao, tb005_data_demissao) VALUES(1, 8, 'Funcionário 01', '1975-01-01', '999.444.555-01', '543.765.234-8', 'Ativo', '2000-01-06',null);
 INSERT INTO tb005_funcionarios (tb004_cod_loja, tb003_cod_endereco, tb005_nome_completo, tb005_data_nascimento, tb005_CPF, tb005_RG, tb005_status, tb005_data_contratacao, tb005_data_demissao) VALUES(2, 2, 'Funcionário 02', '1978-02-03', '999.444.555-02', '543.765.234-9', 'Ativo', '2000-02-06',null);
@@ -158,6 +162,7 @@ INSERT INTO tb005_funcionarios (tb004_cod_loja, tb003_cod_endereco, tb005_nome_c
 INSERT INTO tb005_funcionarios (tb004_cod_loja, tb003_cod_endereco, tb005_nome_completo, tb005_data_nascimento, tb005_CPF, tb005_RG, tb005_status, tb005_data_contratacao, tb005_data_demissao) VALUES(1, 1, 'Funcionário 38', '1982-03-10', '999.444.555-38', '543.765.234-45', 'Ativo', '2000-08-07',null);
 INSERT INTO tb005_funcionarios (tb004_cod_loja, tb003_cod_endereco, tb005_nome_completo, tb005_data_nascimento, tb005_CPF, tb005_RG, tb005_status, tb005_data_contratacao, tb005_data_demissao) VALUES(1, 1, 'Funcionário 39', '1989-04-03', '999.444.555-39', '543.765.234-46', 'Ativo', '2000-09-07',null);
 INSERT INTO tb005_funcionarios (tb004_cod_loja, tb003_cod_endereco, tb005_nome_completo, tb005_data_nascimento, tb005_CPF, tb005_RG, tb005_status, tb005_data_contratacao, tb005_data_demissao) VALUES(1, 4, 'Funcionário 40', '1979-05-01', '999.444.555-40', '543.765.234-47', 'Inativo', '2000-10-07', '2005-08-01');
+
 -- Dados para tabela: tb006_cargos
 INSERT INTO tb006_cargos (tb006_nome_cargo) VALUES('Diretor');
 INSERT INTO tb006_cargos (tb006_nome_cargo) VALUES('Gerente Regional');
@@ -169,6 +174,7 @@ INSERT INTO tb006_cargos (tb006_nome_cargo) VALUES('Vendedor Senior');
 INSERT INTO tb006_cargos (tb006_nome_cargo) VALUES('Motorista');
 INSERT INTO tb006_cargos (tb006_nome_cargo) VALUES('Recursos Humanos');
 INSERT INTO tb006_cargos (tb006_nome_cargo) VALUES('Contador');
+
 -- Dados para tabela: tb005_006_funcionarios_cargos
 INSERT INTO tb005_006_funcionarios_cargos VALUES(1, 1, 30000.00, 0.00, '2008-01-02');
 INSERT INTO tb005_006_funcionarios_cargos VALUES(12, 2, 10000.00, 0.00, '2008-03-02');
@@ -213,58 +219,60 @@ INSERT INTO tb005_006_funcionarios_cargos VALUES(10, 7, 1300.00, 0.11, '2008-08-
 INSERT INTO tb005_006_funcionarios_cargos VALUES(13, 6, 1000.00, 0.07, '2009-09-03');
 INSERT INTO tb005_006_funcionarios_cargos VALUES(8, 7, 1300.00, 0.10, '2009-02-04');
 INSERT INTO tb005_006_funcionarios_cargos VALUES(9, 2, 10000.00, 0.10, '2009-02-05');
+
 -- Dados para tabela: tb010_clientes
-INSERT INTO tb010_clientes VALUES(10000000000, 'NOME Teste 01', '(41);
-INSERT INTO tb010_clientes VALUES(10000000001, 'NOME Teste 02', '(41);
-INSERT INTO tb010_clientes VALUES(10000000002, 'NOME Teste 03', '(41);
-INSERT INTO tb010_clientes VALUES(10000000003, 'NOME Teste 04', '(41);
-INSERT INTO tb010_clientes VALUES(10000000004, 'NOME Teste 05', '(41);
-INSERT INTO tb010_clientes VALUES(10000000005, 'NOME Teste 06', '(41);
-INSERT INTO tb010_clientes VALUES(10000000006, 'NOME Teste 07', '(41);
-INSERT INTO tb010_clientes VALUES(10000000007, 'NOME Teste 08', '(41);
-INSERT INTO tb010_clientes VALUES(10000000008, 'NOME Teste 09', '(41);
-INSERT INTO tb010_clientes VALUES(10000000009, 'NOME Teste 10', '(41);
-INSERT INTO tb010_clientes VALUES(10000000010, 'NOME Teste 11', '(11);
-INSERT INTO tb010_clientes VALUES(10000000011, 'NOME Teste 12', '(41);
-INSERT INTO tb010_clientes VALUES(10000000012, 'NOME Teste 13', '(41);
-INSERT INTO tb010_clientes VALUES(10000000013, 'NOME Teste 14', '(41);
-INSERT INTO tb010_clientes VALUES(10000000014, 'NOME Teste 15', '(41);
-INSERT INTO tb010_clientes VALUES(10000000015, 'NOME Teste 16', '(48);
-INSERT INTO tb010_clientes VALUES(10000000016, 'NOME Teste 17', '(41);
-INSERT INTO tb010_clientes VALUES(10000000017, 'NOME Teste 18', '(41);
-INSERT INTO tb010_clientes VALUES(10000000018, 'NOME Teste 19', '(41);
-INSERT INTO tb010_clientes VALUES(10000000019, 'NOME Teste 20', '(41);
-INSERT INTO tb010_clientes VALUES(10000000020, 'NOME Teste 21', '(41);
-INSERT INTO tb010_clientes VALUES(10000000021, 'NOME Teste 22', '(41);
-INSERT INTO tb010_clientes VALUES(10000000022, 'NOME Teste 23', '(11);
-INSERT INTO tb010_clientes VALUES(10000000023, 'NOME Teste 24', '(41);
-INSERT INTO tb010_clientes VALUES(10000000024, 'NOME Teste 25', '(41);
-INSERT INTO tb010_clientes VALUES(10000000025, 'NOME Teste 26', '(41);
-INSERT INTO tb010_clientes VALUES(10000000026, 'NOME Teste 27', '(41);
-INSERT INTO tb010_clientes VALUES(10000000027, 'NOME Teste 28', '(41);
-INSERT INTO tb010_clientes VALUES(10000000028, 'NOME Teste 29', '(41);
-INSERT INTO tb010_clientes VALUES(10000000029, 'NOME Teste 30', '(41);
-INSERT INTO tb010_clientes VALUES(10000000030, 'NOME Teste 31', '(41);
-INSERT INTO tb010_clientes VALUES(10000000031, 'NOME Teste 32', '(41);
-INSERT INTO tb010_clientes VALUES(10000000032, 'NOME Teste 33', '(41);
-INSERT INTO tb010_clientes VALUES(10000000033, 'NOME Teste 34', '(41);
-INSERT INTO tb010_clientes VALUES(10000000034, 'NOME Teste 35', '(41);
-INSERT INTO tb010_clientes VALUES(10000000035, 'NOME Teste 36', '(41);
-INSERT INTO tb010_clientes VALUES(10000000036, 'NOME Teste 37', '(41);
-INSERT INTO tb010_clientes VALUES(10000000037, 'NOME Teste 38', '(41);
-INSERT INTO tb010_clientes VALUES(10000000038, 'NOME Teste 39', '(41);
-INSERT INTO tb010_clientes VALUES(10000000039, 'NOME Teste 40', '(41);
-INSERT INTO tb010_clientes VALUES(10000000040, 'NOME Teste 41', '(41);
-INSERT INTO tb010_clientes VALUES(10000000041, 'NOME Teste 42', '(41);
-INSERT INTO tb010_clientes VALUES(10000000042, 'NOME Teste 43', '(41);
-INSERT INTO tb010_clientes VALUES(10000000043, 'NOME Teste 44', '(41);
-INSERT INTO tb010_clientes VALUES(10000000044, 'NOME Teste 45', '(41);
-INSERT INTO tb010_clientes VALUES(10000000045, 'NOME Teste 46', '(41);
-INSERT INTO tb010_clientes VALUES(10000000046, 'NOME Teste 47', '(41);
-INSERT INTO tb010_clientes VALUES(10000000047, 'NOME Teste 48', '(41);
-INSERT INTO tb010_clientes VALUES(10000000048, 'NOME Teste 49', '(41);
-INSERT INTO tb010_clientes VALUES(10000000049, 'NOME Teste 50', '(41);
-INSERT INTO tb010_clientes VALUES(10000000050, 'NOME Teste 51', '(41);
+INSERT INTO tb010_clientes VALUES(10000000000, 'NOME Teste 01', '(41) 3333-0001', '(41) 9999-9001');
+INSERT INTO tb010_clientes VALUES(10000000001, 'NOME Teste 02', '(41) 3333-0002', '(41) 9999-9002');
+INSERT INTO tb010_clientes VALUES(10000000002, 'NOME Teste 03', '(41) 3333-0003', '(41) 9999-9003');
+INSERT INTO tb010_clientes VALUES(10000000003, 'NOME Teste 04', '(41) 3333-0004', '(41) 9999-9004');
+INSERT INTO tb010_clientes VALUES(10000000004, 'NOME Teste 05', '(41) 3333-0005', '(41) 9999-9005');
+INSERT INTO tb010_clientes VALUES(10000000005, 'NOME Teste 06', '(41) 3333-0006', '(41) 9999-9006');
+INSERT INTO tb010_clientes VALUES(10000000006, 'NOME Teste 07', '(41) 3333-0007', '(41) 9999-9007');
+INSERT INTO tb010_clientes VALUES(10000000007, 'NOME Teste 08', '(41) 3333-0008', '(41) 9999-9008');
+INSERT INTO tb010_clientes VALUES(10000000008, 'NOME Teste 09', '(41) 3333-0009', '(41) 9999-9009');
+INSERT INTO tb010_clientes VALUES(10000000009, 'NOME Teste 10', '(41) 3333-0010', '(41) 9999-9010');
+INSERT INTO tb010_clientes VALUES(10000000010, 'NOME Teste 11', '(11) 5333-0011', '(41) 9999-9011');
+INSERT INTO tb010_clientes VALUES(10000000011, 'NOME Teste 12', '(41) 3333-0012', '(41) 9999-9012');
+INSERT INTO tb010_clientes VALUES(10000000012, 'NOME Teste 13', '(41) 3333-0013', '(41) 9999-9013');
+INSERT INTO tb010_clientes VALUES(10000000013, 'NOME Teste 14', '(41) 3333-0014', '(41) 9999-9014');
+INSERT INTO tb010_clientes VALUES(10000000014, 'NOME Teste 15', '(41) 3333-0015', '(41) 9999-9015');
+INSERT INTO tb010_clientes VALUES(10000000015, 'NOME Teste 16', '(48) 5333-8989', '(41) 9999-9016');
+INSERT INTO tb010_clientes VALUES(10000000016, 'NOME Teste 17', '(41) 3333-0017', '(41) 9999-9017');
+INSERT INTO tb010_clientes VALUES(10000000017, 'NOME Teste 18', '(41) 3333-0018', '(41) 9999-9018');
+INSERT INTO tb010_clientes VALUES(10000000018, 'NOME Teste 19', '(41) 3333-0019', '(41) 9999-9019');
+INSERT INTO tb010_clientes VALUES(10000000019, 'NOME Teste 20', '(41) 3333-0020', '(41) 9999-9020');
+INSERT INTO tb010_clientes VALUES(10000000020, 'NOME Teste 21', '(41) 3333-0021', '(41) 9999-9021');
+INSERT INTO tb010_clientes VALUES(10000000021, 'NOME Teste 22', '(41) 3333-0022', '(41) 9999-9022');
+INSERT INTO tb010_clientes VALUES(10000000022, 'NOME Teste 23', '(11) 5333-0099', '(41) 9999-9023');
+INSERT INTO tb010_clientes VALUES(10000000023, 'NOME Teste 24', '(41) 3333-0024', '(41) 9999-9024');
+INSERT INTO tb010_clientes VALUES(10000000024, 'NOME Teste 25', '(41) 3333-0025', '(11) 8999-9025');
+INSERT INTO tb010_clientes VALUES(10000000025, 'NOME Teste 26', '(41) 3333-0026', '(41) 9999-9026');
+INSERT INTO tb010_clientes VALUES(10000000026, 'NOME Teste 27', '(41) 3333-0027', '(41) 9999-9027');
+INSERT INTO tb010_clientes VALUES(10000000027, 'NOME Teste 28', '(41) 3333-0028', '(41) 9999-9028');
+INSERT INTO tb010_clientes VALUES(10000000028, 'NOME Teste 29', '(41) 3333-0029', '(41) 9999-9029');
+INSERT INTO tb010_clientes VALUES(10000000029, 'NOME Teste 30', '(41) 3333-0030', '(41) 9999-9030');
+INSERT INTO tb010_clientes VALUES(10000000030, 'NOME Teste 31', '(41) 3333-0031', '(41) 9999-9031');
+INSERT INTO tb010_clientes VALUES(10000000031, 'NOME Teste 32', '(41) 3333-0032', '(41) 9999-9032');
+INSERT INTO tb010_clientes VALUES(10000000032, 'NOME Teste 33', '(41) 3333-0033', '(41) 9999-9033');
+INSERT INTO tb010_clientes VALUES(10000000033, 'NOME Teste 34', '(41) 3333-0034', '(41) 9999-9034');
+INSERT INTO tb010_clientes VALUES(10000000034, 'NOME Teste 35', '(41) 3333-0035', '(41) 9999-9035');
+INSERT INTO tb010_clientes VALUES(10000000035, 'NOME Teste 36', '(41) 3333-0036', '(41) 9999-9036');
+INSERT INTO tb010_clientes VALUES(10000000036, 'NOME Teste 37', '(41) 3333-0037', '(41) 9999-9037');
+INSERT INTO tb010_clientes VALUES(10000000037, 'NOME Teste 38', '(41) 3333-0038', '(41) 9999-9038');
+INSERT INTO tb010_clientes VALUES(10000000038, 'NOME Teste 39', '(41) 3333-0039', '(41) 9999-9039');
+INSERT INTO tb010_clientes VALUES(10000000039, 'NOME Teste 40', '(41) 3333-0040', '(41) 9999-9040');
+INSERT INTO tb010_clientes VALUES(10000000040, 'NOME Teste 41', '(41) 3333-0041', '(41) 9999-9041');
+INSERT INTO tb010_clientes VALUES(10000000041, 'NOME Teste 42', '(41) 3333-0042', '(41) 9999-9042');
+INSERT INTO tb010_clientes VALUES(10000000042, 'NOME Teste 43', '(41) 3333-0043', '(41) 9999-9043');
+INSERT INTO tb010_clientes VALUES(10000000043, 'NOME Teste 44', '(41) 3333-0044', '(41) 9999-9044');
+INSERT INTO tb010_clientes VALUES(10000000044, 'NOME Teste 45', '(41) 3333-0045', '(11) 8999-9325');
+INSERT INTO tb010_clientes VALUES(10000000045, 'NOME Teste 46', '(41) 3333-0046', '(11) 8999-9089');
+INSERT INTO tb010_clientes VALUES(10000000046, 'NOME Teste 47', '(41) 3333-0047', '(41) 9999-9047');
+INSERT INTO tb010_clientes VALUES(10000000047, 'NOME Teste 48', '(41) 3333-0048', '(41) 9999-9048');
+INSERT INTO tb010_clientes VALUES(10000000048, 'NOME Teste 49', '(41) 3333-0049', '(11) 8999-6464');
+INSERT INTO tb010_clientes VALUES(10000000049, 'NOME Teste 50', '(41) 3333-0050', '(41) 9999-9050');
+INSERT INTO tb010_clientes VALUES(10000000050, 'NOME Teste 51', '(41) 3333-0051', '(41) 9999-9051');
+
 -- Dados para tabela: tb010_clientes_antigos
 INSERT INTO tb010_clientes_antigos VALUES(10000000000, 'NOME Teste 01');
 INSERT INTO tb010_clientes_antigos VALUES(10000000001, 'NOME Teste 02');
@@ -278,6 +286,7 @@ INSERT INTO tb010_clientes_antigos VALUES(10000000008, 'NOME Teste 09');
 INSERT INTO tb010_clientes_antigos VALUES(10000000009, 'NOME Teste 10');
 INSERT INTO tb010_clientes_antigos VALUES(10000000010, 'NOME Teste 11');
 INSERT INTO tb010_clientes_antigos VALUES(10000000011, 'NOME Teste 12');
+
 -- Dados para tabela: tb011_logins
 INSERT INTO tb011_logins VALUES('Teste_01',10000000000, 'Teste_01', '2009-01-01');
 INSERT INTO tb011_logins VALUES('Teste_02',10000000001, 'Teste_02', '2009-01-01');
@@ -330,6 +339,7 @@ INSERT INTO tb011_logins VALUES('Teste_48',10000000047, 'Teste_48', '2008-01-01'
 INSERT INTO tb011_logins VALUES('Teste_49',10000000048, 'Teste_49', '2009-04-01');
 INSERT INTO tb011_logins VALUES('Teste_50',10000000049, 'Teste_50', '2009-01-01');
 INSERT INTO tb011_logins VALUES('Teste_51',10000000050, 'Teste_51', '2009-01-01');
+
 -- Dados para tabela: tb013_categorias
 INSERT INTO tb013_categorias (tb013_descricao) VALUES('Alimentos Perecíveis');
 INSERT INTO tb013_categorias (tb013_descricao) VALUES('Alimentos Não Perecíveis');
@@ -339,6 +349,7 @@ INSERT INTO tb013_categorias (tb013_descricao) VALUES('CD e DVD');
 INSERT INTO tb013_categorias (tb013_descricao) VALUES('Roupas Masculinas');
 INSERT INTO tb013_categorias (tb013_descricao) VALUES('Roupas Femininas');
 INSERT INTO tb013_categorias (tb013_descricao) VALUES('Roupas Infantis');
+
 -- Dados para tabela: tb012_produtos
 INSERT INTO tb012_produtos VALUES(10, 1, 'Biscoito Recheado');
 INSERT INTO tb012_produtos VALUES(11, 1, 'Pão-de-queijo Congelado');
@@ -408,6 +419,7 @@ INSERT INTO tb012_produtos VALUES(80, 8, 'Camiseta');
 INSERT INTO tb012_produtos VALUES(81, 8, 'Bermuda');
 INSERT INTO tb012_produtos VALUES(82, 8, 'Tênis');
 INSERT INTO tb012_produtos VALUES(83, 8, 'Bonés');
+
 -- Dados para tabela: tb014_prd_alimentos
 INSERT INTO tb014_prd_alimentos (tb012_cod_produto, tb014_detalhamento, tb014_unidade_medida, tb014_num_lote, tb014_data_vencimento, tb014_valor_sugerido) VALUES(10, 'Trakinas', 'Kilogramas', '8887775456', '2024-02-11', 1.10);
 INSERT INTO tb014_prd_alimentos (tb012_cod_produto, tb014_detalhamento, tb014_unidade_medida, tb014_num_lote, tb014_data_vencimento, tb014_valor_sugerido) VALUES(10, 'Pica-Pau', 'Kilogramas', '3457684345', '2024-01-02', 0.89);
@@ -434,6 +446,7 @@ INSERT INTO tb014_prd_alimentos (tb012_cod_produto, tb014_detalhamento, tb014_un
 INSERT INTO tb014_prd_alimentos (tb012_cod_produto, tb014_detalhamento, tb014_unidade_medida, tb014_num_lote, tb014_data_vencimento, tb014_valor_sugerido) VALUES(18, 'Ades', 'Litros', '120991705w34', '2024-01-05', 1.09);
 INSERT INTO tb014_prd_alimentos (tb012_cod_produto, tb014_detalhamento, tb014_unidade_medida, tb014_num_lote, tb014_data_vencimento, tb014_valor_sugerido) VALUES(18, 'Minute Maid +', 'Litros', '164400135343frt', '2024-08-10', 2.99);
 INSERT INTO tb014_prd_alimentos (tb012_cod_produto, tb014_detalhamento, tb014_unidade_medida, tb014_num_lote, tb014_data_vencimento, tb014_valor_sugerido) VALUES(19, 'Isotônico', 'Litros', '9283478gdy10', '2024-10-06', 3.99);
+
 -- Dados para tabela: tb015_prd_eletros
 INSERT INTO tb015_prd_eletros (tb012_cod_produto, tb015_detalhamento, tb015_tensao, tb015_nivel_consumo_procel, tb015_valor_sugerido) VALUES(30, 'Consul', '110-220 volts', 'A', 999.00);
 INSERT INTO tb015_prd_eletros (tb012_cod_produto, tb015_detalhamento, tb015_tensao, tb015_nivel_consumo_procel, tb015_valor_sugerido) VALUES(30, 'Esmaltec', '110-220 volts', 'B', 999.00);
@@ -493,6 +506,7 @@ INSERT INTO tb015_prd_eletros (tb012_cod_produto, tb015_detalhamento, tb015_tens
 INSERT INTO tb015_prd_eletros (tb012_cod_produto, tb015_detalhamento, tb015_tensao, tb015_nivel_consumo_procel, tb015_valor_sugerido) VALUES(58, 'Tadeu e Tadando', null, null, 32.59);
 INSERT INTO tb015_prd_eletros (tb012_cod_produto, tb015_detalhamento, tb015_tensao, tb015_nivel_consumo_procel, tb015_valor_sugerido) VALUES(59, 'EMTEC', null, null, 1.23);
 INSERT INTO tb015_prd_eletros (tb012_cod_produto, tb015_detalhamento, tb015_tensao, tb015_nivel_consumo_procel, tb015_valor_sugerido) VALUES(59, 'BULK', null, null, 0.99);
+
 -- Dados para tabela: tb016_prd_vestuarios
 INSERT INTO tb016_prd_vestuarios (tb012_cod_produto, tb016_detalhamento, tb016_sexo, tb016_tamanho, tb016_numeracao, tb016_valor_sugerido) VALUES(60, 'Lee', 'M', null, 52, 69.99);
 INSERT INTO tb016_prd_vestuarios (tb012_cod_produto, tb016_detalhamento, tb016_sexo, tb016_tamanho, tb016_numeracao, tb016_valor_sugerido) VALUES(60, 'Malwe', 'M', null, 56, 89.99);
@@ -540,40 +554,42 @@ INSERT INTO tb016_prd_vestuarios (tb012_cod_produto, tb016_detalhamento, tb016_s
 INSERT INTO tb016_prd_vestuarios (tb012_cod_produto, tb016_detalhamento, tb016_sexo, tb016_tamanho, tb016_numeracao, tb016_valor_sugerido) VALUES(82, 'Klin', 'I', null, 25, 39.99);
 INSERT INTO tb016_prd_vestuarios (tb012_cod_produto, tb016_detalhamento, tb016_sexo, tb016_tamanho, tb016_numeracao, tb016_valor_sugerido) VALUES(82, 'Pimpolho', 'I', null, 28, 59.99);
 INSERT INTO tb016_prd_vestuarios (tb012_cod_produto, tb016_detalhamento, tb016_sexo, tb016_tamanho, tb016_numeracao, tb016_valor_sugerido) VALUES(83, 'Tigor T Tigre', 'I', null, null, 9.50);
+
 -- Dados para tabela: tb017_fornecedores
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 01', 'Nome Fantasia - Empresa 01', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 02', 'Nome Fantasia - Empresa 02', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 03', 'Nome Fantasia - Empresa 03', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 04', 'Nome Fantasia - Empresa 04', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 05', 'Nome Fantasia - Empresa 05', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 06', 'Nome Fantasia - Empresa 06', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 07', 'Nome Fantasia - Empresa 07', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 08', 'Nome Fantasia - Empresa 08', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 09', 'Nome Fantasia - Empresa 09', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 10', 'Nome Fantasia - Empresa 10', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 11', 'Nome Fantasia - Empresa 11', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 12', 'Nome Fantasia - Empresa 12', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 13', 'Nome Fantasia - Empresa 13', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 14', 'Nome Fantasia - Empresa 14', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 15', 'Nome Fantasia - Empresa 15', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 16', 'Nome Fantasia - Empresa 16', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 17', 'Nome Fantasia - Empresa 17', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 18', 'Nome Fantasia - Empresa 18', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 19', 'Nome Fantasia - Empresa 19', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 20', 'Nome Fantasia - Empresa 20', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 21', 'Nome Fantasia - Empresa 21', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 22', 'Nome Fantasia - Empresa 22', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 23', 'Nome Fantasia - Empresa 23', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 24', 'Nome Fantasia - Empresa 24', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 25', 'Nome Fantasia - Empresa 25', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 26', 'Nome Fantasia - Empresa 26', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 27', 'Nome Fantasia - Empresa 27', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 28', 'Nome Fantasia - Empresa 28', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 29', 'Nome Fantasia - Empresa 29', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 30', 'Nome Fantasia - Empresa 30', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 31', 'Nome Fantasia - Empresa 31', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 32', 'Nome Fantasia - Empresa 32', '(41);
-INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 33', 'Nome Fantasia - Empresa 33', '(41);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 01', 'Nome Fantasia - Empresa 01', '(41) 3343-4545',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 02', 'Nome Fantasia - Empresa 02', '(41) 3343-4546',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 03', 'Nome Fantasia - Empresa 03', '(41) 3343-4547',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 04', 'Nome Fantasia - Empresa 04', '(41) 3343-4548',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 05', 'Nome Fantasia - Empresa 05', '(41) 3343-4549',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 06', 'Nome Fantasia - Empresa 06', '(41) 3343-4550',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 07', 'Nome Fantasia - Empresa 07', '(41) 3343-4551',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 08', 'Nome Fantasia - Empresa 08', '(41) 3343-4552',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 09', 'Nome Fantasia - Empresa 09', '(41) 3343-4553',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 10', 'Nome Fantasia - Empresa 10', '(41) 3343-4554',7);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 11', 'Nome Fantasia - Empresa 11', '(41) 3343-4555',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 12', 'Nome Fantasia - Empresa 12', '(41) 3343-4556',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 13', 'Nome Fantasia - Empresa 13', '(41) 3343-4557',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 14', 'Nome Fantasia - Empresa 14', '(41) 3343-4558',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 15', 'Nome Fantasia - Empresa 15', '(41) 3343-4559',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 16', 'Nome Fantasia - Empresa 16', '(41) 3343-4560',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 17', 'Nome Fantasia - Empresa 17', '(41) 3343-4561',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 18', 'Nome Fantasia - Empresa 18', '(41) 3343-4562',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 19', 'Nome Fantasia - Empresa 19', '(41) 3343-4563',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 20', 'Nome Fantasia - Empresa 20', '(41) 3343-4564',8);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 21', 'Nome Fantasia - Empresa 21', '(41) 3343-4565',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 22', 'Nome Fantasia - Empresa 22', '(41) 3343-4566',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 23', 'Nome Fantasia - Empresa 23', '(41) 3343-4567',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 24', 'Nome Fantasia - Empresa 24', '(41) 3343-4568',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 25', 'Nome Fantasia - Empresa 25', '(41) 3343-4569',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 26', 'Nome Fantasia - Empresa 26', '(41) 3343-4570',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 27', 'Nome Fantasia - Empresa 27', '(41) 3343-4571',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 28', 'Nome Fantasia - Empresa 28', '(41) 3343-4572',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 29', 'Nome Fantasia - Empresa 29', '(41) 3343-4573',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 30', 'Nome Fantasia - Empresa 30', '(41) 3343-4574',9);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 31', 'Nome Fantasia - Empresa 31', '(41) 3343-4575',10);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 32', 'Nome Fantasia - Empresa 32', '(41) 3343-4576',11);
+INSERT INTO tb017_fornecedores (tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco) VALUES('Empresa 33', 'Nome Fantasia - Empresa 33', '(41) 3343-4577',12);
+
 -- Dados para tabela: tb010_012_vendas
 INSERT INTO tb010_012_vendas (tb010_cpf, tb012_cod_produto, tb005_matricula, tb010_012_data, tb010_012_quantidade, tb010_012_valor_unitario) VALUES(10000000000, 10,  4, '2024-03-11', 2, 1.42);
 INSERT INTO tb010_012_vendas (tb010_cpf, tb012_cod_produto, tb005_matricula, tb010_012_data, tb010_012_quantidade, tb010_012_valor_unitario) VALUES(10000000001, 10,  2, '2024-03-12', 3, 0.94);
@@ -685,6 +701,7 @@ INSERT INTO tb010_012_vendas (tb010_cpf, tb012_cod_produto, tb005_matricula, tb0
 INSERT INTO tb010_012_vendas (tb010_cpf, tb012_cod_produto, tb005_matricula, tb010_012_data, tb010_012_quantidade, tb010_012_valor_unitario) VALUES(10000000015, 82, 36, '2024-04-04', 2, 54.38);
 INSERT INTO tb010_012_vendas (tb010_cpf, tb012_cod_produto, tb005_matricula, tb010_012_data, tb010_012_quantidade, tb010_012_valor_unitario) VALUES(10000000013, 82, 37, '2024-05-04', 1, 81.58);
 INSERT INTO tb010_012_vendas (tb010_cpf, tb012_cod_produto, tb005_matricula, tb010_012_data, tb010_012_quantidade, tb010_012_valor_unitario) VALUES(10000000014, 83, 40, '2024-06-04', 1, 14.38);
+
 -- Dados para tabela: tb012_017_compras
 INSERT INTO tb012_017_compras (tb012_cod_produto, tb017_cod_fornecedor, tb012_017_data, tb012_017_quantidade, tb012_017_valor_unitario) VALUES( 10,  4, '2024-01-01', 3, 0.89);
 INSERT INTO tb012_017_compras (tb012_cod_produto, tb017_cod_fornecedor, tb012_017_data, tb012_017_quantidade, tb012_017_valor_unitario) VALUES( 10,  2, '2024-01-02', 1, 0.59);

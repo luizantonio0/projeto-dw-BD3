@@ -91,9 +91,13 @@ def converter_ddl(ddl_content):
     
     # Outras conversões globais
     ddl_content = re.sub(r'NUMERIC\((\d+),(\d+)\)', r'DECIMAL(\1,\2)', ddl_content)
+    # Converter NUMERIC(15) para BIGINT (para CPFs)
+    ddl_content = re.sub(r'NUMERIC\(15\)', 'BIGINT', ddl_content)
+    # Converter outros NUMERIC(n) para INTEGER
     ddl_content = re.sub(r'NUMERIC\((\d+)\)', 'INTEGER', ddl_content)
     ddl_content = re.sub(r'\bdatetime\b', 'TIMESTAMP', ddl_content, flags=re.IGNORECASE)
     
+    # Remover ASC/DESC das chaves (PostgreSQL não precisa)
     ddl_content = re.sub(r'\s+(ASC|DESC)\s*(?=[,)])', '', ddl_content, flags=re.IGNORECASE)
     
     # Ordem correta para drop (considerando dependências FK)
@@ -243,33 +247,29 @@ def converter_dml(dml_content):
     dml_content = re.sub(r'go\s*$', '', dml_content, flags=re.MULTILINE | re.IGNORECASE)
     dml_content = re.sub(r'\sGO\s*$', '', dml_content, flags=re.MULTILINE)
     
-    # Processar por seções de inserção
-    sections = dml_content.split('--------------------------')
+    # Processar linha por linha para evitar problemas com parênteses
+    linhas = dml_content.split('\n')
+    current_table = ""
     
-    for section in sections:
-        if not section.strip():
+    for linha in linhas:
+        linha = linha.strip()
+        if not linha:
             continue
             
-        # Extrair INSERTs da seção
-        inserts = re.findall(
-            r'INSERT INTO\s+(?:ADS\.dbo\.)?(\w+)(?:\s+VALUES)?\s*\(([^)]+)\)',
-            section,
-            re.IGNORECASE
-        )
-        
-        if not inserts:
-            continue
+        # Verificar se é um INSERT
+        match = re.match(r'INSERT INTO\s+(?:ADS\.dbo\.)?(\w+)\s+VALUES\s*\((.*)\)', linha, re.IGNORECASE)
+        if match:
+            table_name = match.group(1)
+            values = match.group(2)
             
-        # Agrupar por tabela
-        current_table = ""
-        for table_name, values in inserts:
+            # Adicionar cabeçalho da tabela se mudou
             if table_name != current_table:
                 if current_table:
                     resultado.append("")
                 resultado.append(f"-- Dados para tabela: {table_name}")
                 current_table = table_name
             
-            # Converter valores
+            # Converter valores (principalmente datas)
             values_converted = converter_valores(values)
             
             # Gerar INSERT
