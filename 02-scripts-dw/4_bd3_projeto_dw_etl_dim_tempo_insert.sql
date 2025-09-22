@@ -998,7 +998,7 @@ INSERT INTO dim_tempo (id_tempo, data_completa, dia_do_mes, dia_da_semana, nome_
 (20220923, '2022-09-23', 23, 5, 'Friday', 266, 38, 9, 'September', 3, 2022, False, False),
 (20220924, '2022-09-24', 24, 6, 'Saturday', 267, 38, 9, 'September', 3, 2022, False, True),
 (20220925, '2022-09-25', 25, 7, 'Sunday', 268, 38, 9, 'September', 3, 2022, False, True),
-(20220926, '2022-09-26', 26, 1, 'Monday', 269, 39, 9, 'September', 3, 2022, False, False);
+(20220926, '2022-09-26', 26, 1, 'Monday', 269, 39, 9, 'September', 3, 2022, False, False),
 (20220927, '2022-09-27', 27, 2, 'Tuesday', 270, 39, 9, 'September', 3, 2022, False, False),
 (20220928, '2022-09-28', 28, 3, 'Wednesday', 271, 39, 9, 'September', 3, 2022, False, False),
 (20220929, '2022-09-29', 29, 4, 'Thursday', 272, 39, 9, 'September', 3, 2022, False, False),
@@ -1998,7 +1998,7 @@ INSERT INTO dim_tempo (id_tempo, data_completa, dia_do_mes, dia_da_semana, nome_
 (20250619, '2025-06-19', 19, 4, 'Thursday', 170, 25, 6, 'June', 2, 2025, False, False),
 (20250620, '2025-06-20', 20, 5, 'Friday', 171, 25, 6, 'June', 2, 2025, False, False),
 (20250621, '2025-06-21', 21, 6, 'Saturday', 172, 25, 6, 'June', 2, 2025, False, True),
-(20250622, '2025-06-22', 22, 7, 'Sunday', 173, 25, 6, 'June', 2, 2025, False, True);
+(20250622, '2025-06-22', 22, 7, 'Sunday', 173, 25, 6, 'June', 2, 2025, False, True),
 (20250623, '2025-06-23', 23, 1, 'Monday', 174, 26, 6, 'June', 2, 2025, False, False),
 (20250624, '2025-06-24', 24, 2, 'Tuesday', 175, 26, 6, 'June', 2, 2025, False, False),
 (20250625, '2025-06-25', 25, 3, 'Wednesday', 176, 26, 6, 'June', 2, 2025, False, False),
