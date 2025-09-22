@@ -308,7 +308,6 @@ def precisa_colunas_explicitas(table_name):
     tables_with_serial = [
         'tb002_cidades', 'tb003_enderecos', 'tb004_lojas', 'tb005_funcionarios',
         'tb006_cargos', 'tb010_012_vendas', 'tb012_017_compras', 'tb013_categorias',
-        'tb012_produtos',  # Adicionado para DW (tem SERIAL)
         'tb014_prd_alimentos', 'tb015_prd_eletros', 'tb016_prd_vestuarios',
         'tb017_fornecedores', 'tb999_log'
     ]
@@ -318,7 +317,7 @@ def precisa_colunas_explicitas(table_name):
 def obter_colunas_tabela(table_name, dml_content):
     """Obtém as colunas de uma tabela baseado nos INSERTs"""
     
-    # Mapeamento de colunas por tabela (excluindo campos SERIAL) - VERSÃO DW
+    # Mapeamento de colunas por tabela (excluindo campos SERIAL)
     colunas_map = {
         'tb002_cidades': 'tb001_sigla_uf, tb002_nome_cidade',
         'tb003_enderecos': 'tb001_sigla_uf, tb002_cod_cidade, tb003_nome_rua, tb003_numero_rua, tb003_complemento, tb003_ponto_referencia, tb003_bairro, tb003_CEP',
@@ -326,7 +325,6 @@ def obter_colunas_tabela(table_name, dml_content):
         'tb005_funcionarios': 'tb004_cod_loja, tb003_cod_endereco, tb005_nome_completo, tb005_data_nascimento, tb005_CPF, tb005_RG, tb005_status, tb005_data_contratacao, tb005_data_demissao',
         'tb006_cargos': 'tb006_nome_cargo',
         'tb013_categorias': 'tb013_descricao',
-        'tb012_produtos': 'tb012_descricao, tb013_cod_categoria',  # Ajustado para DW
         'tb017_fornecedores': 'tb017_razao_social, tb017_nome_fantasia, tb017_fone, tb003_cod_endereco',
         'tb014_prd_alimentos': 'tb012_cod_produto, tb014_detalhamento, tb014_unidade_medida, tb014_num_lote, tb014_data_vencimento, tb014_valor_sugerido',
         'tb015_prd_eletros': 'tb012_cod_produto, tb015_detalhamento, tb015_tensao, tb015_nivel_consumo_procel, tb015_valor_sugerido',
