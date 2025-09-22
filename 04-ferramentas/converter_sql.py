@@ -36,9 +36,6 @@ def converter_sql_server_para_postgresql(arquivo_origem, pasta_destino):
     # Criar os arquivos de saída
     criar_arquivos_saida(ddl_postgresql, dml_postgresql, pasta_destino)
     
-    # Criar script de execução
-    criar_script_execucao(pasta_destino)
-    
     print("\n🎉 Conversão concluída com sucesso!")
     print(f"📁 Arquivos criados na pasta: {pasta_destino}")
 
@@ -77,7 +74,7 @@ def converter_ddl(ddl_content):
     resultado = []
     resultado.append("-- =========================================")
     resultado.append("-- MIGRAÇÃO BD_VAREJO para PostgreSQL (Supabase)")
-    resultado.append("-- Script DDL - Gerado automaticamente")
+    resultado.append("-- Script DDL - Estrutura das Tabelas")
     resultado.append("-- =========================================\n")
     
     # Remover comandos específicos do SQL Server
@@ -87,57 +84,108 @@ def converter_ddl(ddl_content):
     ddl_content = re.sub(r'go\s*$', '', ddl_content, flags=re.MULTILINE | re.IGNORECASE)
     ddl_content = re.sub(r'\sGO\s*$', '', ddl_content, flags=re.MULTILINE)
     
-    # Extrair e ordernar DROP TABLEs
-    drops = re.findall(r'DROP TABLE\s+(\w+)', ddl_content, re.IGNORECASE)
-    if drops:
-        resultado.append("-- Removendo tabelas existentes")
-        for table in reversed(drops):  # Reverter ordem para respeitar FK
-            resultado.append(f"DROP TABLE IF EXISTS {table} CASCADE;")
-        resultado.append("")
+    # Ordem correta para drop (considerando dependências FK)
+    drop_order = [
+        'tb010_012_vendas', 'tb012_017_compras', 'tb014_prd_alimentos',
+        'tb015_prd_eletros', 'tb016_prd_vestuarios', 'tb011_logins',
+        'tb010_clientes_antigos', 'tb010_clientes', 'tb012_produtos',
+        'tb013_categorias', 'tb017_fornecedores', 'tb005_006_funcionarios_cargos',
+        'tb005_funcionarios', 'tb006_cargos', 'tb004_lojas',
+        'tb003_enderecos', 'tb002_cidades', 'tb001_uf', 'tb999_log'
+    ]
     
-    # Extrair CREATE TABLEs
+    resultado.append("-- Remover tabelas se existirem (em ordem de dependências)")
+    for table in drop_order:
+        resultado.append(f"DROP TABLE IF EXISTS {table} CASCADE;")
+    resultado.append("")
+    resultado.append("-- =========================================")
+    resultado.append("-- CRIANDO TABELAS")
+    resultado.append("-- =========================================\n")
+    
+    # Extrair CREATE TABLEs e converter
     create_tables = re.finditer(
-        r'CREATE TABLE\s+(\w+)\s*\((.*?)\)', 
+        r'CREATE TABLE\s+(\w+)\s*\n\(\s*(.*?)\n\)', 
         ddl_content, 
         re.DOTALL | re.IGNORECASE
     )
     
-    tables_sql = []
+    tables_created = []
     
     for match in create_tables:
         table_name = match.group(1)
         table_def = match.group(2)
         
         # Converter definições de colunas
-        table_def_converted = converter_definicoes_colunas(table_def)
+        columns = []
+        primary_keys = []
         
-        sql = f"CREATE TABLE {table_name} (\n{table_def_converted}\n);"
-        tables_sql.append((table_name, sql))
+        for line in table_def.split(','):
+            line = line.strip()
+            if not line:
+                continue
+            
+            # Converter tipos de dados
+            line = re.sub(r'NUMERIC\((\d+)\)\s+IDENTITY\s*\(\s*\d+\s*,\s*\d+\s*\)', 'SERIAL', line)
+            line = re.sub(r'NUMERIC\((\d+),(\d+)\)', r'DECIMAL(\1,\2)', line)
+            line = re.sub(r'NUMERIC\((\d+)\)', 'INTEGER', line)
+            line = re.sub(r'\bdatetime\b', 'TIMESTAMP', line, flags=re.IGNORECASE)
+            
+            columns.append(f"    {line}")
+        
+        # Gerar SQL da tabela
+        table_sql = f"-- Tabela: {table_name}\nCREATE TABLE {table_name} (\n"
+        table_sql += ',\n'.join(columns)
+        table_sql += "\n);\n"
+        
+        resultado.append(table_sql)
+        tables_created.append(table_name)
     
-    # Adicionar CREATE TABLEs
-    for table_name, sql in tables_sql:
-        resultado.append(f"-- Tabela: {table_name}")
-        resultado.append(sql)
-        resultado.append("")
+    # Extrair e converter PKs
+    resultado.append("-- =========================================")
+    resultado.append("-- ADICIONANDO PRIMARY KEYS")
+    resultado.append("-- =========================================\n")
     
-    # Extrair e converter ALTER TABLEs (PKs e FKs)
-    constraints = re.finditer(
-        r'ALTER TABLE\s+(\w+)\s+ADD CONSTRAINT\s+(\w+)\s+(.*?)(?=ALTER TABLE|$)',
+    pk_matches = re.finditer(
+        r'ALTER TABLE\s+(\w+)\s+ADD CONSTRAINT\s+(\w+)\s+PRIMARY KEY\s*\((.*?)\)',
         ddl_content,
-        re.DOTALL | re.IGNORECASE
+        re.IGNORECASE
     )
     
-    resultado.append("-- Adicionando constraints")
-    for match in constraints:
+    for match in pk_matches:
         table_name = match.group(1)
         constraint_name = match.group(2)
-        constraint_def = match.group(3).strip()
+        columns = match.group(3)
         
-        constraint_converted = converter_constraint(constraint_def)
+        sql = f"ALTER TABLE {table_name} ADD CONSTRAINT {constraint_name} PRIMARY KEY ({columns});"
+        resultado.append(sql)
+    
+    resultado.append("")
+    
+    # Extrair e converter FKs
+    resultado.append("-- =========================================")
+    resultado.append("-- ADICIONANDO FOREIGN KEYS")
+    resultado.append("-- =========================================\n")
+    
+    fk_matches = re.finditer(
+        r'ALTER TABLE\s+(\w+)\s+ADD CONSTRAINT\s+(\w+)\s+FOREIGN KEY\s*\((.*?)\)\s+REFERENCES\s+(\w+)\((.*?)\)',
+        ddl_content,
+        re.IGNORECASE
+    )
+    
+    for match in fk_matches:
+        table_name = match.group(1)
+        constraint_name = match.group(2)
+        fk_columns = match.group(3)
+        ref_table = match.group(4)
+        ref_columns = match.group(5)
         
-        sql = f"ALTER TABLE {table_name}\n    ADD CONSTRAINT {constraint_name} {constraint_converted};"
+        sql = f"ALTER TABLE {table_name}\n    ADD CONSTRAINT {constraint_name}\n    FOREIGN KEY ({fk_columns})\n    REFERENCES {ref_table}({ref_columns});"
         resultado.append(sql)
         resultado.append("")
+    
+    resultado.append("-- =========================================")
+    resultado.append("-- ESTRUTURA CRIADA COM SUCESSO!")
+    resultado.append("-- =========================================")
     
     return "\n".join(resultado)
 
@@ -178,7 +226,7 @@ def converter_dml(dml_content):
     resultado = []
     resultado.append("-- =========================================")
     resultado.append("-- MIGRAÇÃO BD_VAREJO para PostgreSQL (Supabase)")
-    resultado.append("-- Script DML - Gerado automaticamente")
+    resultado.append("-- Script DML - Inserção de Dados")
     resultado.append("-- =========================================\n")
     
     # Remover comandos específicos do SQL Server
@@ -187,39 +235,50 @@ def converter_dml(dml_content):
     dml_content = re.sub(r'go\s*$', '', dml_content, flags=re.MULTILINE | re.IGNORECASE)
     dml_content = re.sub(r'\sGO\s*$', '', dml_content, flags=re.MULTILINE)
     
-    # Extrair e converter INSERTs
-    inserts = re.finditer(
-        r'INSERT INTO\s+(?:ADS\.dbo\.)?(\w+)(?:\s+\([^)]+\))?\s+VALUES\s*\(([^)]+)\)',
-        dml_content,
-        re.IGNORECASE
-    )
+    # Processar por seções de inserção
+    sections = dml_content.split('--------------------------')
     
-    tabela_atual = ""
-    
-    for match in inserts:
-        table_name = match.group(1)
-        values = match.group(2)
+    for section in sections:
+        if not section.strip():
+            continue
+            
+        # Extrair INSERTs da seção
+        inserts = re.findall(
+            r'INSERT INTO\s+(?:ADS\.dbo\.)?(\w+)(?:\s+VALUES)?\s*\(([^)]+)\)',
+            section,
+            re.IGNORECASE
+        )
         
-        if table_name != tabela_atual:
-            if tabela_atual:
-                resultado.append("")
-            resultado.append(f"-- Dados para tabela: {table_name}")
-            tabela_atual = table_name
-        
-        # Converter valores
-        values_converted = converter_valores(values)
-        
-        # Determinar se precisa especificar colunas para SERIAL
-        if precisa_colunas_explicitas(table_name):
-            colunas = obter_colunas_tabela(table_name, dml_content)
-            if colunas:
-                sql = f"INSERT INTO {table_name} ({colunas}) VALUES({values_converted});"
+        if not inserts:
+            continue
+            
+        # Agrupar por tabela
+        current_table = ""
+        for table_name, values in inserts:
+            if table_name != current_table:
+                if current_table:
+                    resultado.append("")
+                resultado.append(f"-- Dados para tabela: {table_name}")
+                current_table = table_name
+            
+            # Converter valores
+            values_converted = converter_valores(values)
+            
+            # Gerar INSERT
+            if precisa_colunas_explicitas(table_name):
+                colunas = obter_colunas_tabela(table_name, dml_content)
+                if colunas:
+                    sql = f"INSERT INTO {table_name} ({colunas}) VALUES({values_converted});"
+                else:
+                    sql = f"INSERT INTO {table_name} VALUES({values_converted});"
             else:
                 sql = f"INSERT INTO {table_name} VALUES({values_converted});"
-        else:
-            sql = f"INSERT INTO {table_name} VALUES({values_converted});"
-        
-        resultado.append(sql)
+            
+            resultado.append(sql)
+    
+    resultado.append("\n-- =========================================")
+    resultado.append("-- DADOS INSERIDOS COM SUCESSO!")
+    resultado.append("-- =========================================")
     
     return "\n".join(resultado)
 
@@ -286,82 +345,15 @@ def criar_arquivos_saida(ddl_content, dml_content, pasta_destino):
     print("  - BD_VAREJO_PostgreSQL_DDL.sql (estrutura das tabelas)")
     print("  - BD_VAREJO_PostgreSQL_DML.sql (dados)")
 
-def criar_script_execucao(pasta_destino):
-    """Cria um script com instruções de execução"""
-    
-    instrucoes = """
-# 🚀 Como executar a migração no Supabase
-
-## Passo 1: Acessar o Supabase
-1. Entre no seu projeto Supabase (https://supabase.com)
-2. Vá em "SQL Editor" no menu lateral
-
-## Passo 2: Executar DDL (Estrutura)
-1. Abra o arquivo `BD_VAREJO_PostgreSQL_DDL.sql`
-2. Copie todo o conteúdo
-3. Cole no SQL Editor do Supabase
-4. Clique em "RUN" para executar
-5. Verifique se todas as tabelas foram criadas
-
-## Passo 3: Executar DML (Dados)
-1. Abra o arquivo `BD_VAREJO_PostgreSQL_DML.sql`
-2. Copie todo o conteúdo
-3. Cole no SQL Editor do Supabase
-4. Clique em "RUN" para executar
-5. Verifique se os dados foram inseridos
-
-## Passo 4: Verificação
-Execute estas consultas para verificar:
-
-```sql
--- Ver todas as tabelas criadas
-SELECT table_name FROM information_schema.tables 
-WHERE table_schema = 'public';
-
--- Contar registros por tabela
-SELECT 'tb001_uf' as tabela, COUNT(*) as registros FROM tb001_uf
-UNION ALL
-SELECT 'tb002_cidades', COUNT(*) FROM tb002_cidades
-UNION ALL
-SELECT 'tb003_enderecos', COUNT(*) FROM tb003_enderecos
-UNION ALL
-SELECT 'tb004_lojas', COUNT(*) FROM tb004_lojas
-UNION ALL
-SELECT 'tb005_funcionarios', COUNT(*) FROM tb005_funcionarios
-UNION ALL
-SELECT 'tb006_cargos', COUNT(*) FROM tb006_cargos;
-```
-
-## ⚠️ Dicas importantes:
-- Execute primeiro o DDL, depois o DML
-- Se houver erro, verifique as mensagens no console
-- Você pode executar os scripts em partes menores se necessário
-- Use transações se quiser poder reverter: BEGIN; ... COMMIT; ou ROLLBACK;
-
-## 🆘 Resolução de problemas comuns:
-- **Erro de FK**: Execute DDL antes do DML
-- **Erro de SERIAL**: Os campos auto-incremento são gerados automaticamente
-- **Erro de data**: Verifique o formato YYYY-MM-DD
-- **Erro de encoding**: Certifique-se que está usando UTF-8
-
-✅ Migração concluída com sucesso!
-"""
-    
-    with open(os.path.join(pasta_destino, 'INSTRUCOES_EXECUCAO.md'), 'w', encoding='utf-8') as f:
-        f.write(instrucoes)
-    
-    print("✅ Arquivo de instruções criado:")
-    print("  - INSTRUCOES_EXECUCAO.md (como executar no Supabase)")
-
 def main():
     """Função principal"""
     
     print("🔄 Conversor Automático SQL Server → PostgreSQL")
     print("=" * 50)
     
-    # Caminhos dos arquivos
-    arquivo_origem = r"c:\Users\787203\Downloads\BD3\BD_VAREJO.sql"
-    pasta_destino = r"c:\Users\787203\Downloads\BD3\postgresql_converted"
+    # Caminhos dos arquivos - usando estrutura do repositório
+    arquivo_origem = r"..\01-backup-original\BD_VAREJO.sql"
+    pasta_destino = r"..\03-migracao-postgresql"
     
     # Verificar se arquivo existe
     if not os.path.exists(arquivo_origem):
@@ -372,9 +364,9 @@ def main():
     converter_sql_server_para_postgresql(arquivo_origem, pasta_destino)
     
     print("\n📋 Próximos passos:")
-    print("1. Abra a pasta 'postgresql_converted'")
-    print("2. Leia o arquivo 'INSTRUCOES_EXECUCAO.md'")
-    print("3. Execute os scripts no Supabase SQL Editor")
+    print("1. Abra a pasta '03-migracao-postgresql'")
+    print("2. Execute primeiro o DDL no Supabase SQL Editor")
+    print("3. Execute depois o DML no Supabase SQL Editor")
     print("\n🎯 Migração automatizada concluída!")
 
 if __name__ == "__main__":
