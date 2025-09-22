@@ -94,6 +94,8 @@ def converter_ddl(ddl_content):
     ddl_content = re.sub(r'NUMERIC\((\d+)\)', 'INTEGER', ddl_content)
     ddl_content = re.sub(r'\bdatetime\b', 'TIMESTAMP', ddl_content, flags=re.IGNORECASE)
     
+    ddl_content = re.sub(r'\s+(ASC|DESC)\s*(?=[,)])', '', ddl_content, flags=re.IGNORECASE)
+    
     # Ordem correta para drop (considerando dependências FK)
     drop_order = [
         'tb010_012_vendas', 'tb012_017_compras', 'tb014_prd_alimentos',

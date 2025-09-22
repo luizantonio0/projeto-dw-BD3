@@ -209,25 +209,25 @@ CREATE TABLE tb999_log (
 -- ADICIONANDO PRIMARY KEYS
 -- =========================================
 
-ALTER TABLE tb001_uf ADD CONSTRAINT XPKtb001_uf PRIMARY KEY (tb001_sigla_uf ASC);
-ALTER TABLE tb002_cidades ADD CONSTRAINT XPKtb002_cidades PRIMARY KEY (tb002_cod_cidade ASC,tb001_sigla_uf ASC);
-ALTER TABLE tb003_enderecos ADD CONSTRAINT XPKtb003_enderecos PRIMARY KEY (tb003_cod_endereco ASC);
-ALTER TABLE tb004_lojas ADD CONSTRAINT XPKtb004_lojas PRIMARY KEY (tb004_cod_loja ASC);
-ALTER TABLE tb005_006_funcionarios_cargos ADD CONSTRAINT XPKtb005_006_funcionarios_cargos PRIMARY KEY (tb005_matricula ASC,tb006_cod_cargo ASC);
-ALTER TABLE tb005_funcionarios ADD CONSTRAINT XPKtb005_funcionarios PRIMARY KEY (tb005_matricula ASC);
-ALTER TABLE tb006_cargos ADD CONSTRAINT XPKtb006_cargos PRIMARY KEY (tb006_cod_cargo ASC);
-ALTER TABLE tb010_012_vendas ADD CONSTRAINT XPKtb010_012_vendas PRIMARY KEY (tb010_012_cod_venda ASC,tb005_matricula ASC,tb010_cpf ASC,tb012_cod_produto ASC);
-ALTER TABLE tb010_clientes ADD CONSTRAINT XPKtb010_clientes PRIMARY KEY (tb010_cpf ASC);
-ALTER TABLE tb010_clientes_antigos ADD CONSTRAINT XPKtb010_clientes_antigos PRIMARY KEY (tb010_cpf ASC);
-ALTER TABLE tb011_logins ADD CONSTRAINT XPKtb011_logins PRIMARY KEY (tb011_logins ASC);
-ALTER TABLE tb012_017_compras ADD CONSTRAINT XPKtb017_compras PRIMARY KEY (tb012_017_cod_compra ASC,tb012_cod_produto ASC,tb017_cod_fornecedor ASC);
-ALTER TABLE tb012_produtos ADD CONSTRAINT XPKtb012_produtos PRIMARY KEY (tb012_cod_produto ASC);
-ALTER TABLE tb013_categorias ADD CONSTRAINT XPKtb013_categorias PRIMARY KEY (tb013_cod_categoria ASC);
-ALTER TABLE tb014_prd_alimentos ADD CONSTRAINT XPKtb014_prd_alimentos PRIMARY KEY (tb014_cod_prd_alimentos ASC,tb012_cod_produto ASC);
-ALTER TABLE tb015_prd_eletros ADD CONSTRAINT XPKtb015_prd_tvs PRIMARY KEY (tb015_cod_prd_eletro ASC,tb012_cod_produto ASC);
-ALTER TABLE tb016_prd_vestuarios ADD CONSTRAINT XPKtb016_refrigeradores PRIMARY KEY (tb016_cod_prd_vestuario ASC,tb012_cod_produto ASC);
-ALTER TABLE tb017_fornecedores ADD CONSTRAINT XPKtb017_fornecedor PRIMARY KEY (tb017_cod_fornecedor ASC);
-ALTER TABLE tb999_log ADD CONSTRAINT XPKtb999_log PRIMARY KEY (tb999_cod_log ASC);
+ALTER TABLE tb001_uf ADD CONSTRAINT XPKtb001_uf PRIMARY KEY (tb001_sigla_uf);
+ALTER TABLE tb002_cidades ADD CONSTRAINT XPKtb002_cidades PRIMARY KEY (tb002_cod_cidade,tb001_sigla_uf);
+ALTER TABLE tb003_enderecos ADD CONSTRAINT XPKtb003_enderecos PRIMARY KEY (tb003_cod_endereco);
+ALTER TABLE tb004_lojas ADD CONSTRAINT XPKtb004_lojas PRIMARY KEY (tb004_cod_loja);
+ALTER TABLE tb005_006_funcionarios_cargos ADD CONSTRAINT XPKtb005_006_funcionarios_cargos PRIMARY KEY (tb005_matricula,tb006_cod_cargo);
+ALTER TABLE tb005_funcionarios ADD CONSTRAINT XPKtb005_funcionarios PRIMARY KEY (tb005_matricula);
+ALTER TABLE tb006_cargos ADD CONSTRAINT XPKtb006_cargos PRIMARY KEY (tb006_cod_cargo);
+ALTER TABLE tb010_012_vendas ADD CONSTRAINT XPKtb010_012_vendas PRIMARY KEY (tb010_012_cod_venda,tb005_matricula,tb010_cpf,tb012_cod_produto);
+ALTER TABLE tb010_clientes ADD CONSTRAINT XPKtb010_clientes PRIMARY KEY (tb010_cpf);
+ALTER TABLE tb010_clientes_antigos ADD CONSTRAINT XPKtb010_clientes_antigos PRIMARY KEY (tb010_cpf);
+ALTER TABLE tb011_logins ADD CONSTRAINT XPKtb011_logins PRIMARY KEY (tb011_logins);
+ALTER TABLE tb012_017_compras ADD CONSTRAINT XPKtb017_compras PRIMARY KEY (tb012_017_cod_compra,tb012_cod_produto,tb017_cod_fornecedor);
+ALTER TABLE tb012_produtos ADD CONSTRAINT XPKtb012_produtos PRIMARY KEY (tb012_cod_produto);
+ALTER TABLE tb013_categorias ADD CONSTRAINT XPKtb013_categorias PRIMARY KEY (tb013_cod_categoria);
+ALTER TABLE tb014_prd_alimentos ADD CONSTRAINT XPKtb014_prd_alimentos PRIMARY KEY (tb014_cod_prd_alimentos,tb012_cod_produto);
+ALTER TABLE tb015_prd_eletros ADD CONSTRAINT XPKtb015_prd_tvs PRIMARY KEY (tb015_cod_prd_eletro,tb012_cod_produto);
+ALTER TABLE tb016_prd_vestuarios ADD CONSTRAINT XPKtb016_refrigeradores PRIMARY KEY (tb016_cod_prd_vestuario,tb012_cod_produto);
+ALTER TABLE tb017_fornecedores ADD CONSTRAINT XPKtb017_fornecedor PRIMARY KEY (tb017_cod_fornecedor);
+ALTER TABLE tb999_log ADD CONSTRAINT XPKtb999_log PRIMARY KEY (tb999_cod_log);
 
 -- =========================================
 -- ADICIONANDO FOREIGN KEYS
