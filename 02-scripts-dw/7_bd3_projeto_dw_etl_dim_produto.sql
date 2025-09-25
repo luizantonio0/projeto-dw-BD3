@@ -10,7 +10,7 @@ SELECT
     p.tb012_descricao        AS produto_descricao,
     p.tb013_cod_categoria    AS id_categoria_origem,
     c.tb013_descricao   AS categoria_nome,
-    -- Defina a regra para tipo_produto (exemplo simples)
+    -- Defina a regra para tipo_produto 
     CASE 
         WHEN c.tb013_descricao ILIKE '%eletrônico%' THEN 'Eletrônico'
         WHEN c.tb013_descricao ILIKE '%alimento%'   THEN 'Alimento'
